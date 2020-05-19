@@ -19,7 +19,6 @@ def create_app(config_class=Config):
     from app.errors import errors as errors_bp
     app.register_blueprint(errors_bp)
 
-
     if not app.debug and not app.testing:
         if app.config['LOG_TO_STDOUT']:
             stream_handler = logging.StreamHandler()
