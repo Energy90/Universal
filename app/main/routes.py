@@ -6,7 +6,7 @@ from app.main.utils import getPercentage, get_allcountries, get_country_populati
 @bp.route('/')
 @bp.route('/index')
 def index():
-    joke = get_jokes()
+    joke = 'get_jokes()'
     return render_template('main/index.html', title='Home', joke=joke)
 
 @bp.route('/crush', methods=['GET', 'POST'])
