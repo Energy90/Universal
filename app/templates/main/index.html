@@ -3,7 +3,7 @@
 {% block main %}
 <div class="jumbotron mt-5 text-center text-white bg-info">
     <blockquote class="blockquote text-center">
-        <h4 id="joke">{{ joke.joke }}</h4>
+        <h4 id="joke">{{ joke }}</h4>
     </blockquote>
     <a href="{{ url_for('main.index') }}" class="btn btn-primary">Random Joke</a>
 </div>
