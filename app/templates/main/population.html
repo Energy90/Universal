@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% from 'bootstrap/form.html' import render_form %}
+{% block main %}
+<ul class="nav nav-tabs mt-5">
+    <li class="nav-item">
+        <a class="nav-link active" href="#">{{ title }}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('main.compare') }}">Compare Countries</a>
+    </li>
+</ul>
+<h4 class="text-center text-danger mt-5">World Populaion in {{ world_population.total_countries }} countries</h4>
+<h2 class="text-center">{{ world_population.world_population }}</h2>
+<div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        {% if country_pop %}
+            <p>Country: <span class="text-primary">{{ country_pop.country_name }}</span></p>
+            <p>Population: <span class="text-primary">{{ country_pop.population }}</span></p>
+            <p>Ranking: <span class="text-primary">{{ country_pop.ranking }}</p>
+            
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ country_pop.world_share }}%;"
+                 aria-valuenow="{{ country_pop.world_population }}" aria-valuemax="100">
+                 {{ '%0.2f'|format(country_pop.world_share|float) }}%
+                </div>
+            </div>
+        {% endif %}
+        {{ render_form(form, button_style="primary") }}
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock main %}

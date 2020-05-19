@@ -1,0 +1,12 @@
+/* square edges */
+.square-edges
+{
+    border-radius: 0;
+}
+
+@media (max-width: 767px)
+{
+    #country {
+        margin-top: 2rem;
+    }  
+}

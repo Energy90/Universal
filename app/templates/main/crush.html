@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% from 'bootstrap/form.html' import render_form, form_errors %}
+{% block main %}
+    <h2 class="text-center mt-5">Who's your crush?</h2>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {{ render_form(form, button_style="primary") }}
+            {% if result %}
+            <div class="progress mt-3">
+                <div class="progress-bar" role="progressbar" style="width: {{ result.percentage }}%" aria-valuenow="{{ result.percentage }}"
+                aria-valuemin="0" aria-valuemax="100">{{ result.percentage }}</div>
+            </div>
+            <div class="alert alert-primary mt-3" role="alert">
+                {{ result.result }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock main %}

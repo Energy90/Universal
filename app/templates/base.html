@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        {% block style %}
+        <!-- Boostrap CSS, Custom CSS-->
+        {{ bootstrap.load_css() }}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        {% endblock style %}
+
+        {% if title %}
+        <title>Universal - {{ title }}</title>
+        {% else %}
+        <title>Universal</title>
+        {% endif %}
+    </head>
+    <body>
+        <header id="head">
+            <!-- begin navigation -->
+            {% from 'bootstrap/nav.html' import render_nav_item %}
+            <nav class="navbar navbar-expand-md navbar-light bg-light border fixed-top">
+                <a class="navbar-brand" href='#'>Universal</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>Menu
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mr-auto mt-2">
+                        {{ render_nav_item('main.index', 'Home', use_li=True) }}
+                    </ul>
+                    <ul class="navbar-nav mt-2 justify-content-end">
+                        {{ render_nav_item('main.crush', 'Crush', use_li=True) }}
+                        {{ render_nav_item('main.population', 'Population', use_li=True) }}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- begin main page -->
+        <main role="main" class="container p-5">
+            <!-- page content -->
+            {% block main %}{% endblock main %}
+        </main>
+        <!-- end page main -->
+
+        <!-- begin footer -->
+        <footer class="container-fluid text-center">
+            <small>Design by <a href="https://cmalindi.co.za">Clarence</a></small>
+        </footer>
+        <!-- end footer -->
+
+        <!-- Javascript -->
+        {% block script %}
+
+        {{ bootstrap.load_js() }}
+
+        {% endblock script %}
+    </body>
+</html>

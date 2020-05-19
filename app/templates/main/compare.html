@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% from "bootstrap/form.html" import render_form %}
+{% block main %}
+<ul class="nav nav-tabs mt-5">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('main.population') }}">{{ title }}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Compare Countries</a>
+    </li>
+</ul>
+<div class="row mt-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        {% if country_one_pop and country_two_pop %}
+            {% set percentage_one=country_one_pop.population/(country_one_pop.population + country_two_pop.population) %}
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Country: <span class="text-primary">{{ country_one_pop.country_name }}</span></p>
+                    <p>Population: <span class="text-primary">{{ country_one_pop.population }}</span></p>
+                    <p>Ranking: <span class="text-primary">{{ country_one_pop.ranking }}</span></p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ percentage_one * 100 }}%;"
+                        aria-valuenow="{{ percentage_one * 100 }}" aria-valuemax="100">
+                        {{ '%0.2f'|format(percentage_one * 100|float) }}%
+                        </div>
+                    </div>
+                </div>
+                {% set percentage_two = country_two_pop.population/(country_one_pop.population + country_two_pop.population) %}
+                <div class="col-md-6" id="country">
+                    <p>Country: <span class="text-primary">{{ country_two_pop.country_name }}</span></p>
+                    <p>Population: <span class="text-primary">{{ country_two_pop.population }}</span></p>
+                    <p>Ranking: <span class="text-primary">{{ country_two_pop.ranking }}</span></p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ percentage_two * 100 }}%;"
+                        aria-valuenow="{{ percentage_two * 100 }}" aria-valuemax="100">
+                        {{ '%0.2f'|format(percentage_two * 100|float) }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {{ render_form(form, button_style="primary") }}
+    </div>
+</div>
+{% endblock %}
