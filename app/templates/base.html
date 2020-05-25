@@ -37,8 +37,22 @@
                 </div>
             </nav>
         </header>
+
+    
         <!-- begin main page -->
         <main role="main" class="container p-5">
+        <!-- alert messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, messages in messages %}
+                        <div class="mt-5 alert alert-{{ category }} border text-center square-edges" role="alert">
+                            {{ messages }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+
             <!-- page content -->
             {% block main %}{% endblock main %}
         </main>

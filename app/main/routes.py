@@ -30,9 +30,9 @@ def population():
     if form.validate_on_submit():
         country = {}
         country["country_name"] = form.country.data.title()
-
         country_pop = get_country_population(country)
-
+        if not country_pop:
+            flash('Oops! Country not found.', 'danger')
     return render_template('main/population.html', title='Population', form=form, country_pop=country_pop, world_population=world_population)
 
 
@@ -48,4 +48,7 @@ def compare():
 
         country["country_name"] = form.country_two.data.title()
         country_two_pop = get_country_population(country)
+
+        if not (country_one_pop and country_two_pop):
+            flash("Oops! Countries not found.", 'danger')
     return render_template('main/compare.html', title='Population', form=form, country_one_pop=country_one_pop, country_two_pop=country_two_pop)
